@@ -1,0 +1,41 @@
+- class_name = ''
+- class_name += defined?(row_class) ? row_class : ''
+- class_name += (defined?(clickable) && clickable == true) ? ' clickable' : ''
+- class_name += (defined?(clickable_xhr) && clickable_xhr == true) ? ' clickable_xhr' : ''
+- data = {href: send(url_helper, row)} if defined?(url_helper) && !defined?(url_parameter)
+- data = {href: send(url_helper, url_parameter => row.id)} if defined?(url_helper) && defined?(url_parameter)
+- as_json_method = defined?(as_json_method) && as_json_method ? as_json_method : 'as_json'
+
+%tr{id: row.is_a?(Hash) ? nil : row.try(:id), class: class_name, data: data}
+  - row.send(as_json_method).each do |k, v|
+    - if defined?(highlight_columns) && highlight_columns && highlight_columns[:columns] && highlight_columns[:color] && highlight_columns[:columns].include?(k.to_sym)
+      - td_style = {style: "background-color: #{highlight_columns[:color]}"}
+    %td{td_style ? td_style : {}}
+      - if !v.nil?
+        - if v.is_a?(TrueClass)
+          %span.label.label-default.label-success true
+        - elsif v.is_a?(FalseClass)
+          %span.label.label-default.label-danger false
+        - elsif v.is_a?(String)
+          - if v.empty?
+            %span.label.label-default Empty
+          - elsif v =~ URI::regexp(%w(http https))
+            = link_to v.truncate(20), v, target: :blank
+          - elsif v.is_number?
+            %span.badge.badge-default= v
+          - else
+            %span.label.label-default.label-info= v
+        - elsif (v.is_a?(Integer) || v.is_a?(Float))
+          - if k == :run_time
+            %span.label.label-default.label-as-badge{class: "label-#{alert_class_for_runtime(v)}"}= v
+          - else
+            %span.badge.badge-default= v
+        - elsif v.is_a?(ActiveSupport::TimeWithZone)
+          %span.label.label-default= v.in_time_zone(Specmon.time_zone).strftime("%Y-%m-%d / %-l:%M%P %Z")
+        - elsif v.is_a?(Hash)
+          %pre
+            %code.json= JSON.pretty_generate(v)
+        - else
+          = v
+      - else
+        %span.label.label-default Null

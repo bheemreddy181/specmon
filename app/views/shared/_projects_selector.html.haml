@@ -1,0 +1,5 @@
+- options_data = Specmon.projects.map(&:last).map { |pj| ["#{pj.name} (#{pj.branch.downcase})", pj.id, { data: { href: last_project_builds_path(pj.id) } } ] }
+- options = options_for_select(options_data, selected: @project.id)
+- select_options = {class: 'selectpicker clickable'}
+- select_options[:class] = "#{select_options[:class]}"
+= select_tag :projects_selector, options, select_options

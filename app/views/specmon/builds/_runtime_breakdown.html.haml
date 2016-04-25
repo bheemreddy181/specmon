@@ -1,0 +1,13 @@
+.row
+  .col-lg-3
+    %h4 # Examples
+    %div{style: 'font-size: 70px; color: #777777'}= @build.examples_count
+  .col-lg-3
+    %h4 (runtime >= 1s)
+    %div{style: 'font-size: 70px; color: #d9534f'}= @build.examples_runtime_gt_1.count
+  .col-lg-3
+    %h4 (0.5s >= runtime < 1s)
+    %div{style: 'font-size: 70px; color: #f0ad4e'}= @build.examples_runtime_gt_0_5_lt_1.count
+  .col-lg-3
+    %h4 (runtime < 0.5s)
+    %div{style: 'font-size: 70px; color: #5cb85c'}= @build.examples_runtime_lt_0_5.count

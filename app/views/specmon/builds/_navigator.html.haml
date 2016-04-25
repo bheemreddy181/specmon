@@ -1,0 +1,19 @@
+- if @build.previous
+  - previous_arrow = {class: 'btn btn-default btn-info', icon: 'glyphicon-arrow-left', title: "Previous (#{@build.previous.vcs_revision.first(7)})", link: {path: build_path_in_current_project_context(@build.previous.id)}}
+- else
+  - previous_arrow = {class: 'btn btn-default btn-default disabled', icon: 'glyphicon-arrow-left', title: "Previous"}
+
+- if @build.next
+  - next_arrow = {class: 'btn btn-default btn-info', icon: 'glyphicon-arrow-right', icon_position: 'right', title: "Next (#{@build.next.vcs_revision.first(7)})", btn_group_class: 'pull-right', link: {path: build_path_in_current_project_context(@build.next.id)}}
+- else
+  - next_arrow = {class: 'btn btn-default btn-default disabled', icon: 'glyphicon-arrow-right', icon_position: 'right', title: "Next", btn_group_class: 'pull-right'}
+
+.row
+  .col-lg-4
+    = render partial: 'shared/buttons', locals: {buttons: [previous_arrow] }
+  .col-lg-4
+    %h4.text-center= "Build #{@build.build_num} (#{@build.vcs_revision.first(7)})"
+  .col-lg-4
+    = render partial: 'shared/buttons', locals: {buttons: [next_arrow] }
+
+%hr

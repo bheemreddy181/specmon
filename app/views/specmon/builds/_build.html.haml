@@ -1,0 +1,37 @@
+.panel.panel-default.panel-info{style: 'margin-top: 25px'}
+  .panel-heading
+    %strong.panel-title Details
+  .panel-body
+    .row
+      .col-md-4
+        %dt Build num
+        %dd= link_to @build.build_num, circleci_url(@build.build_num)
+        %dt Revision
+        %dd= link_to @build.vcs_revision.first(7), github_url(@build.vcs_revision)
+        %dt Started at
+        %dd= @build.started_at.in_time_zone(Specmon.time_zone).strftime("%Y-%m-%d / %-l:%M%P %Z")
+        %dt Completed at
+        %dd= @build.stopped_at.in_time_zone(Specmon.time_zone).strftime("%Y-%m-%d / %-l:%M%P %Z")
+      .col-md-4
+        - if @build.examples_count
+          %dt Number of examples
+          %dd= @build.examples_count
+        - if @build.build_time
+          %dt Build time
+          %dd= seconds_to_duration(@build.build_time)
+        - if @build.queue_time
+          %dt Queue time
+          %dd= seconds_to_duration(@build.queue_time)
+        - if @build.run_time_sum
+          %dt Run time
+          %dd= seconds_to_duration(@build.run_time_sum)
+      .col-md-4
+        - if @build.run_time_max
+          %dt Max run time
+          %dd= "#{@build.run_time_max.round(2)} secs"
+        - if @build.run_time_median
+          %dt Median run time
+          %dd= "#{@build.run_time_median.round(2)} secs"
+        - if @build.run_time_mean
+          %dt Mean run time
+          %dd= "#{@build.run_time_mean.round(2)} secs"

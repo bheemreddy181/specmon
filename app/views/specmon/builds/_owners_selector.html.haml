@@ -1,0 +1,6 @@
+- options_data = @owners.map { |ow| [ow.name, ow.name.parameterize.gsub(/-/,'_'), { data: { href: build_path_in_current_project_context(@build, {owner: ow.name.parameterize.gsub(/-/,'_')}) } } ] }
+- options = options_for_select(options_data, selected: params[:owner])
+- select_options = {class: 'selectpicker clickable', data: {'live-search': true}}
+- select_options[:class] = "#{select_options[:class]}"
+- select_options[:title] = 'All owners'
+= select_tag :owners_selector, options, select_options

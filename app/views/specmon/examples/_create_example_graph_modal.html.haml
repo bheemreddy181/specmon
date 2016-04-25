@@ -1,0 +1,11 @@
+#create_example_graph_modal.modal.fade{tabindex: "-1", role: "dialog"}
+  .modal-dialog.modal-lg{role: "document"}
+    .modal-content
+      .modal-header
+        %button.close{aria: {label: "Close"}, data: {dismiss: "modal"}, type: "button"}
+          %span{aria: {hidden: true} } &#215;
+        %h4.modal-title Details
+      .modal-body
+        = render partial: 'chart', locals: {data: @data}
+      .modal-footer
+        %button.btn.btn-default{data: {dismiss: "modal"}, type: "button"} Close

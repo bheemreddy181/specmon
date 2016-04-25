@@ -1,0 +1,5 @@
+$('#create_example_graph_modal').remove()
+$('body').append("#{j(render partial: 'create_example_graph_modal')}")
+$('#create_example_graph_modal').modal('show');
+// Hack to force chartkick.js to resize chart by trigger onresize event on window object.
+setTimeout(function() { $('#create_example_graph_modal .modal-body').removeClass('hidden'); var evt = document.createEvent('UIEvents'); evt.initUIEvent('resize', true, false,window,0); window.dispatchEvent(evt); }, 150);

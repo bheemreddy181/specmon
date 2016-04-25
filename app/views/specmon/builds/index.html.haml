@@ -1,0 +1,23 @@
+= render partial: 'shared/header', locals: {title: "Builds for #{@project.id}", h_class: 'h3'}
+
+- if !@builds.empty?
+  .row
+    .col-lg-12
+      .text-center
+        = paginate @builds
+      .clearfix
+      %table.table.table-hover
+        %thead
+          %tr
+            %th ID
+            %th Build num
+            %th Revision
+            %th Completed at
+            %th Build time
+        %tbody
+          = render partial: 'shared/row_from_json', collection: @builds, as: :row, locals: {as_json_method: :as_json_resolved, clickable: true, url_helper: 'build_path_in_current_project_context'}
+      .clearfix
+      .text-center
+        = paginate @builds
+- else
+  = render partial: 'shared/alert', locals: {class_name: 'info', icon: 'glyphicon-info-sign', message: "No builds found."}

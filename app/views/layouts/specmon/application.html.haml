@@ -1,0 +1,24 @@
+!!!
+%html
+  = content_for :head do
+    = stylesheet_link_tag "application", media: "all"
+    = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"
+    = javascript_include_tag "https://www.google.com/jsapi", "chartkick"
+    = javascript_include_tag "application"
+  = render partial: 'layouts/specmon/head'
+  %body
+    %header.navbar.navbar-fixed-top.navbar-inverse
+      %nav.navbar-inner
+        .container
+      = link_to "Specmon", root_path, class: 'navbar-brand'
+      .navbar-search.pull-left.navbar-selectpicker= render partial: 'shared/projects_selector'
+      = render partial: 'shared/navbar'
+    #main{role: :main}
+      .container
+        .content
+          #flash.row= render partial: 'shared/flash_messages', flash: flash
+          .row
+            .span12
+              = yield
+
+= javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"

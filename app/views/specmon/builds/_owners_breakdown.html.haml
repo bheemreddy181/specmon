@@ -1,0 +1,6 @@
+- data = Hash[@build.examples.group_by(&:owner).map{ |k, v| [k.empty? ? "unknown" : k, v.sum(&:run_time)] }]
+.row
+  .col-lg-6
+    = pie_chart(data)
+  .col-lg-6
+    = bar_chart(data)

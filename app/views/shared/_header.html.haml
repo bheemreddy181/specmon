@@ -1,0 +1,28 @@
+.page-header
+  %div{class: defined?(h_class) ? h_class : 'h2'}
+    - if defined?(title_icon) && title_icon
+      %span.glyphicon{class: title_icon, style: 'top: 4px'}
+    = title
+    - if defined?(right_button_form) && right_button_form
+      = right_button_form
+    - if defined?(right_buttons) && right_buttons
+      = render partial: 'shared/buttons', locals: {buttons: right_buttons.each { |b| b[:btn_group_class] = 'pull-right' } }
+    - if defined?(subtitle) && subtitle
+      %h5{style: 'color: #777777'}
+        - if defined?(subtitle_icon) && subtitle_icon
+          %span.glyphicon{class: subtitle_icon, style: 'top: 2px'}
+        - if defined?(subtitle_link) && subtitle_link
+          = link_to subtitle, subtitle_link[:path] ? subtitle_link[:path] : '#', method: subtitle_link[:method] ? subtitle_link[:method] : nil, data: subtitle_link[:data] ? subtitle_link[:data] : nil, remote: subtitle_link[:remote] ? subtitle_link[:remote] : nil
+        - else
+          = subtitle
+        - if defined?(subtitle_right_buttons) && subtitle_right_buttons
+          = render partial: 'shared/buttons', locals: {buttons: subtitle_right_buttons.each { |b| b[:btn_group_class] = 'pull-right' } }
+          .clearfix
+    - if defined?(subtitle2) && subtitle2
+      %h5{style: 'color: #777777'}
+        - if defined?(subtitle2_icon) && subtitle2_icon
+          %span.glyphicon{class: subtitle2_icon, style: 'top: 2px'}
+        - if defined?(subtitle2_link) && subtitle2_link
+          = link_to subtitle2, subtitle2_link[:path] ? subtitle2_link[:path] : '#', method: subtitle2_link[:method] ? subtitle2_link[:method] : nil, data: subtitle2_link[:data] ? subtitle2_link[:data] : nil, remote: subtitle2_link[:remote] ? subtitle2_link[:remote] : nil
+        - else
+          = subtitle2

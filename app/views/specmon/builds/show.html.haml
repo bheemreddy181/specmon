@@ -1,0 +1,48 @@
+- if @build
+
+  = render partial: 'navigator'
+  = render partial: 'build'
+
+  = render partial: 'shared/header', locals: {title: "Build time over the time", h_class: 'h3'}
+
+  = render partial: 'build_time_over_the_time'
+
+  = render partial: 'shared/header', locals: {title: "Build examples", h_class: 'h3'}
+
+  - if !@examples.empty?
+    - if @project.show_owners?
+      = render partial: 'shared/header', locals: {title: "Filters", h_class: 'h4'}
+      = render partial: 'owners_selector'
+    = render partial: 'shared/header', locals: {title: "Runtime Breakdown", h_class: 'h4'}
+    = render partial: 'runtime_breakdown'
+    - if @project.show_owners?
+      = render partial: 'shared/header', locals: {title: "Owners Runtime Breakdown", h_class: 'h4'}
+      = render partial: 'owners_breakdown'
+    = render partial: 'shared/header', locals: {title: "Examples", h_class: 'h4'}
+    .row
+      .col-lg-12
+        .text-center
+          = paginate @examples
+        .clearfix
+        %table.table.table-hover
+          %thead
+            %tr
+              %th
+                %span.glyphicon.glyphicon-user
+                Owner
+              %th
+                %span.glyphicon.glyphicon-tags
+                Description
+              %th
+                %span.glyphicon.glyphicon-file
+                File
+              %th
+                %span.glyphicon.glyphicon-time
+                Runtime
+          %tbody
+            = render partial: 'shared/row_from_json', collection: @examples, as: :row, locals: {clickable_xhr: true, url_helper: 'example_path_in_current_project_and_build_context', as_json_method: :as_json_resolved}
+        .clearfix
+        .text-center
+          = paginate @examples
+  - else
+    = render partial: 'shared/alert', locals: {class_name: 'info', icon: 'glyphicon-info-sign', message: "No examples found."}

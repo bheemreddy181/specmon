@@ -1,0 +1,16 @@
+= render partial: 'shared/header', locals: {title: "Owners", h_class: 'h3'}
+
+- if !@builds.empty?
+  .row
+    .col-lg-12
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Owner/Team
+            %th # specs
+            %th Runtime sum (secs)
+            %th Runtime mean (secs)
+        %tbody
+          = render partial: 'shared/row_from_json', collection: @builds, as: :row, locals: {as_json_method: :as_json_owner_resolved}
+- else
+  = render partial: 'shared/alert', locals: {class_name: 'info', icon: 'glyphicon-info-sign', message: "No builds found."}

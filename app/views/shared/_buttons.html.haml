@@ -1,0 +1,31 @@
+- buttons.each do |h|
+  .btn-group{class: h[:btn_group_class], style: h[:btn_group_style]}
+    - if h[:link]
+      = link_to h[:link][:path] ? h[:link][:path] : '#', method: h[:link][:method] ? h[:link][:method] : nil, data: h[:link][:data] ? h[:link][:data] : nil, remote: h[:link][:remote] ? h[:link][:remote] : nil, target: h[:link][:target] ? h[:link][:target] : nil do
+        %button.btn{class: h[:class], style: 'margin-left: 5px;', data: h[:data] ? h[:data] : nil}
+          - if (h[:icon] && !h[:icon_position]) || (h[:icon] && h[:icon_position] == 'left')
+            %span.glyphicon{class: h[:icon]}
+          = h[:title]
+          - if h[:icon] && h[:icon_position] == 'right'
+            %span.glyphicon{class: h[:icon]}
+          - if h[:subtitle]
+            %small= h[:subtitle]
+    - else
+      %button.btn{class: h[:class], style: 'margin-left: 5px;', data: h[:data] ? h[:data] : nil, id: h[:id] ? h[:id] : nil}
+        - if h[:icon]
+          %span.glyphicon{class: h[:icon]}
+        = h[:title]
+        - if h[:subtitle]
+          %small= h[:subtitle]
+
+      - if h[:split_button]
+        %button.btn.dropdown-toggle{class: h[:class], aria: {expanded: 'false', haspopup: 'true'}, data: {toggle: :dropdown, type: :button }}
+          %span.caret
+        - if h[:split_button_menu]
+          %ul.dropdown-menu
+            - h[:split_button_menu].each do |m|
+              %li
+                = link_to m[:link][:path] ? m[:link][:path] : '#', method: m[:link][:method] ? m[:link][:method] : nil, data: m[:link][:data] ? m[:link][:data] : nil, remote: m[:link][:remote] ? m[:link][:remote] : nil, target: m[:link][:target] ? m[:link][:target] : nil do
+                  - if m[:link][:icon]
+                    %span.glyphicon{class: m[:link][:icon]}
+                  = m[:link][:title] ? m[:link][:title] : 'Unknown'

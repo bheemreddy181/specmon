@@ -1,0 +1,9 @@
+%ul.nav.navbar-nav.navbar-left
+  %li{ class: is_active('builds') }
+    = link_to project_builds_path(@project.id) do
+      %span.glyphicon.glyphicon-list-alt
+      ="All builds (#{@project.builds.count})"
+  -# %li{ class: is_active('owners') }
+  -#   = link_to project_owners_path(@project.id) do
+  -#     %span.glyphicon.glyphicon-user
+  -#     Owners

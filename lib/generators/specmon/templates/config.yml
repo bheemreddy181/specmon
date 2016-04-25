@@ -1,0 +1,19 @@
+# see https://github.com/instacart/specmon for more info
+
+projects:
+  my-project-1-master:
+    url: <%= ENV["SPECMON_PROJECT1_DATABASE_URL"] %>
+    name: my-project-1
+    username: username
+    token: token
+    branch: master
+    show_owners: true
+    adapter: circleci
+  my-project-2-master:
+    url: <%= ENV["SPECMON_PROJECT2_DATABASE_URL"] %>
+    name: my-project-2
+    username: username
+    token: token
+    branch: master
+    show_owners: false
+    adapter: circleci
