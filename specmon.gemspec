@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'rails', '~> 4.2.6', '>= 4.2.6'
   s.add_runtime_dependency 'pg', '~> 0.18.4', '>= 0.18.4'
   s.add_runtime_dependency 'jquery-rails', '~> 4.1.1', '>= 4.1.1'
-  s.add_runtime_dependency 'haml-rails', '~> 0.9.0', '>= 0.9.0'
+  s.add_runtime_dependency 'haml-rails', '~> 1.0.0', '>= 1.0.0'
   s.add_runtime_dependency 'bootstrap-sass', '~> 3.3.6', '>= 3.3.6'
   s.add_runtime_dependency 'sass-rails', '~> 5.0.4', '>= 5.0.4'
   s.add_runtime_dependency 'kaminari', '~> 0.16.3', '>= 0.16.3'
